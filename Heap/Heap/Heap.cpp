@@ -3,6 +3,9 @@
 #define MAX_HEAP 100
 class Heap {
 public:
+	Heap(int len = MAX_HEAP) {
+		nodes = new int[len];
+	}
 	int min() {
 		if(length == 0)
 			return -1;
@@ -41,11 +44,11 @@ public:
 	};
 private:
 	int length = 0;
-	int nodes[MAX_HEAP];
+	int* nodes;
 };
 
 int main() {
-	Heap heap;
+	Heap heap(100);
 	heap.push(1);
 	heap.push(6);
 	heap.push(8);
