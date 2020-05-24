@@ -7,7 +7,7 @@ struct node {
 	int prior;
 };
 
-node* getNode(int key, int prior) {
+node* getNewNode(int key, int prior) {
     node* newnode = new node;
     newnode->key = key;
     newnode->prior = prior;
@@ -48,14 +48,14 @@ int main() {
 
 
 
-    node* root = getNode(5, 4);
+    node* root = getNewNode(5, 4);
 
-    insert(root, getNode(2, 2));
-    insert(root, getNode(3, 9));
-    insert(root, getNode(0, 5));
-    insert(root, getNode(1, 3));
-    insert(root, getNode(6, 6));
-    insert(root, getNode(4, 11));
+    insert(root, getNewNode(2, 2));
+    insert(root, getNewNode(3, 9));
+    insert(root, getNewNode(0, 5));
+    insert(root, getNewNode(1, 3));
+    insert(root, getNewNode(6, 6));
+    insert(root, getNewNode(4, 11));
 
     printInorder(root);
 
