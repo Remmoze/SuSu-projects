@@ -1,28 +1,28 @@
 #include <iostream>
 #include <string.h>
-#define size 1024
+#define size 32768
 
 struct node {
 	char* value;
 	node* next = nullptr;
 };
 
-int hash(char* data) {
-	int sum = 0;
-	for(int i = 0; i < 10; i++) {
-		if(data[i] == '\0')
-			break;
+static const unsigned int FNV_PRIME = 16777619u;
+static const unsigned int OFFSET_BASIS = 2166136261u;
 
-		sum += (char)data[i] * (i + 1) * 1103515245 + 12345;
+int hash(char* data) {
+	const size_t length = 11;
+	unsigned int hash = OFFSET_BASIS;
+	for(size_t i = 0; i < length; ++i) {
+		if(data[0] == '\0')
+			break;
+		hash ^= *data++;
+		hash *= FNV_PRIME;
 	}
-	return abs(sum) % size;
+	return hash % size;
 }
 
 node* hashtable[size];
-node* getNew(char* data) {
-	return elem;
-}
-
 bool lookup(char* data) {
 	auto p = hashtable[hash(data)];
 	while(p) {
@@ -61,7 +61,7 @@ int main() {
 		} else if(strcmp(input, "+") == 0) {
 			char* str = (char*)calloc(10, sizeof(char));
 			std::cin >> str;
-			node * Node = new node;
+			node* Node = new node;
 			Node->value = str;
 			insert(Node);
 		}
