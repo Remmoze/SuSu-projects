@@ -1,49 +1,48 @@
 #include <iostream>
-#include <vector>
 #define MAX_ISLANDS 10000
 #define MAX_ROADS 50000
 
-std::vector<int> tree[MAX_ROADS];
-int parent[MAX_ISLANDS];
+int size[MAX_ISLANDS];
+int parents[MAX_ROADS];
 
 void make_set(int v) {
-	tree[v] = std::vector<int>(1, v);
-	parent[v] = v;
+	if(parents[v] == 0)
+		parents[v] = v;
 }
 
 int find_set(int v) {
-	return parent[v];
+	if(parents[v] == v)
+		return v;
+	return parents[v] = find_set(parents[v]);
 }
 
 bool union_sets(int a, int b) {
 	a = find_set(a);
 	b = find_set(b);
-	if(a == b) return false;
-	if(tree[a].size() < tree[b].size())
+	if(a == b) {
+		++size[a];
+		return false;
+	}
+	if(size[a] < size[b])
 		std::swap(a, b);
-	int v = find_set(b);
-	parent[v] = a;
-	tree[a].push_back(v);
+	parents[b] = a;
+	size[a] += size[b] + 1;
 	return true;
 }
+
 int main() {
 	int num, max;
 	std::cin >> num;
 	std::cin >> max;
-	
-	for(int i = 1; i <= num; i++) {
-		make_set(i);
-	}
 
-	int inp1, inp2;
+	int c1, c2;
 	for(int i = 0; i < max; i++) {
-		std::cin >> inp1;
-		std::cin >> inp2;
-		if(union_sets(inp1, inp2))
+		std::cin >> c1;
+		make_set(c1);
+		std::cin >> c2;
+		make_set(c2);
+		if(num > 1 && union_sets(c1, c2))
 			--num;
-		if(num == 1)
-			break;
 	}
-
-	std::cout << tree[find_set(1)].size() << std::endl;
+	std::cout << size[find_set(c1)] << std::endl;
 }
