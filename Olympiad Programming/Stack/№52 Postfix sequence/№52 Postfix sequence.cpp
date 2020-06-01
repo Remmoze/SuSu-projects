@@ -1,4 +1,7 @@
-#include <iostream>
+﻿#include <iostream>
+#include <fstream>
+#include "ctype.h"
+
 #define growthFactor 1.75
 #define initialSize 5
 
@@ -25,22 +28,10 @@ void push(struct Stack* stack, int value) {
 	stack->p[stack->cur++] = value;
 }
 
-bool isEmpty(struct Stack* stack) {
-	return stack->cur <= 0;
-}
-
 int pop(struct Stack* stack) {
 	return stack->p[--stack->cur];
 };
-int back(struct Stack* stack) {
-	return stack->p[stack->cur - 1];
-};
-int size(struct Stack* stack) {
-	return stack->cur;
-}
-void clear(struct Stack* stack) {
-	stack->cur = 0;
-}
+
 void print(struct Stack* stack) {
 	for(int i = 0; i < stack->cur; i++) {
 		std::cout << stack->p[i];
@@ -51,7 +42,28 @@ void print(struct Stack* stack) {
 int main() {
 	Stack stack;
 	init(&stack);
-	push(&stack, 1);
+	std::ifstream inp("./input.txt");
+	if(!inp.is_open()) {
+		std::cout << "ALARM!";
+		return 0;
+	}
+	char val;
+	while(inp >> val) {
+		if(isdigit(val)) {
+			push(&stack, (int)(val - '0'));
+		} else {
+			int v2 = pop(&stack);
+			int v1 = pop(&stack);
+			switch(val) {
+				case '+': push(&stack, v1 + v2); break;
+				case '-': push(&stack, v1 - v2); break;
+				case '*': push(&stack, v1 * v2); break;
+			}
+			//printf("%i %c %i = %i\n", v1, val, v2, stack.p[stack.cur - 1]);
+		}
+		//printf("%c ", val);
+	}
+	inp.close();
 	printf("%i", pop(&stack));
 	return 0;
 }
