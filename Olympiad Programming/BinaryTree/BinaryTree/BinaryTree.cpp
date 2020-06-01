@@ -1,11 +1,5 @@
 #include <iostream>
 
-/*
-
-Not a final version. This is the solution to the test, not the implementation of the structure yet.
-
-*/
-
 struct node {
 	int value;
 	node* left = nullptr;
