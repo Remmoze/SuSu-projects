@@ -10,6 +10,10 @@ void push(struct Stack* stack, int value) {
 	stack->elements[stack->cur++] = value;
 }
 
+bool isEmpty(struct Stack* stack) {
+	return stack->cur <= 0;
+}
+
 void pop(struct Stack* stack) {
 	--stack->cur;
 };
@@ -40,9 +44,17 @@ int main() {
 			push(&stack, inp);
 			std::cout << "ok" << std::endl;
 		} else if(input == "pop") {
+			if(isEmpty(&stack)) {
+				std::cout << "error" << std::endl;
+				continue;
+			}
 			std::cout << back(&stack) << std::endl;
 			pop(&stack);
 		} else if(input == "back") {
+			if(isEmpty(&stack)) {
+				std::cout << "error" << std::endl;
+				continue;
+			}
 			std::cout << back(&stack) << std::endl;
 		} else if(input == "size") {
 			std::cout << size(&stack) << std::endl;
