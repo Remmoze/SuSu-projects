@@ -2,6 +2,7 @@
 *.vcxproj
 *.vcxproj.filters
 *.sln
+*.csproj
 
 
 ## Ignore Visual Studio temporary files, build results, and
