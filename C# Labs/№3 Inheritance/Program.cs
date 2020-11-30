@@ -2,75 +2,47 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Inheritance {
 
-    public enum PlaneType {
-        Passenger,
-        Cargo
-    }
-
-    public abstract class Plane {
-        public PlaneType type;
-        public string name;
-        public int weight; //tons
-        public abstract int GetFlightLoad(); //kg
-        public Plane(string _name, int _weight) {
-            weight = _weight;
-            name = _name;
-        }
-    }
-
-    public class CargoPlane : Plane {
-        public int cargoWeight;
-        public CargoPlane(string name, int _weight, int cargo) : base(name, _weight) {
-            type = PlaneType.Cargo;
-            cargoWeight = cargo;
-        }
-        public override int GetFlightLoad() {
-            return cargoWeight + weight*1000;
-        }
-    }
-
-    public class PassengerPlane : Plane {
-        public int passengers;
-        public PassengerPlane(string name, int _weight, int _passengers) : base(name, _weight) {
-            passengers = _passengers;
-            type = PlaneType.Passenger;
-        }
-        public override int GetFlightLoad() {
-            return passengers * 62 + weight * 1000;
-        }
-    }
-
-    //public class Boeing_747 : PassangerPlane {
-    //    public Boeing_747() : base(333, 366) {}
-    //}
-    //public class Airbus_A330 : PassangerPlane {
-    //    public Airbus_A330() : base(500, 277) { }
-    //}
-
     public class Airline {
-        public List<Plane> planes = new List<Plane>();
+        private List<Plane> planes = new List<Plane>();
+        public int AvarageWeight { get; private set; }
+
         public Airline() {
             //planes.Add(new PassengerPlane("Boeing_747", 333, 366));
             //planes.Add(new PassengerPlane("Airbus_A330", 500, 277));
             //planes.Add(new CargoPlane("TestCargo", 666, 333));
+            RecalculateWeight();
         }
 
-        public void ImportJSON() {
-            var json = File.ReadAllText("./test.json");
-            planes = JsonConvert.DeserializeObject<List<Plane>>(json);
+        private void RecalculateWeight() {
+            AvarageWeight = planes.Sum(x => x.GetFlightLoad());
         }
 
-        public void ExportJSON() {
-            var json = JsonConvert.SerializeObject(planes);
-            File.WriteAllText("./test.json", json);
+        public void AddPlane(Plane plane) {
+            planes.Add(plane);
+            RecalculateWeight();
+        }
+
+        JsonSerializerSettings JsonSettings = new JsonSerializerSettings {
+            TypeNameHandling = TypeNameHandling.All
+        };
+        public void ImportJSON(string path = "./test.json") {
+            var json = File.ReadAllText(path);
+            planes = JsonConvert.DeserializeObject<List<Plane>>(json, JsonSettings);
+            RecalculateWeight();
+        }
+
+        public void ExportJSON(string path = "./test.json") {
+            string json = JsonConvert.SerializeObject(planes, JsonSettings);
+            File.WriteAllText(path, json);
         }
 
         public void Print() {
             foreach(var plane in planes) {
-                Console.WriteLine($"{plane.name}, {plane.type}, {plane.GetFlightLoad()}");
+                Console.WriteLine($"{plane.name} | {plane.type} | {plane.GetFlightLoad()} kg");
             }
         }
     }
@@ -78,9 +50,70 @@ namespace Inheritance {
     class Program {
         public static Airline airline = new Airline();
         static void Main(string[] args) {
-            airline.ImportJSON();
-            airline.Print();
-            Console.WriteLine("Hello World!");
+
+            var options = new string[] { "add", "sort", "list last 5 planes", "list last 3 flights", "Import from Json", "Export to Json", "exit" };
+            var selected = 0;
+            while(true) {
+                Console.Clear();
+                Console.WriteLine("* Select next action: \n");
+
+                for(int i = 0; i < options.Length; i++) {
+                    if(i == selected)
+                        Console.Write("> ");
+                    Console.WriteLine(options[i]);
+                }
+
+                switch(Console.ReadKey(true).Key) {
+                    case ConsoleKey.DownArrow: {
+                        selected = Math.Min(selected + 1, options.Length - 1);
+                        break;
+                    }
+                    case ConsoleKey.UpArrow: {
+                        selected = Math.Max(selected - 1, 0);
+                        break;
+                    }
+                    case ConsoleKey.Enter: {
+                        Select(options[selected]);
+                        selected = 0;
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        public static void Select(string option) {
+            Console.Clear();
+            switch(option) {
+                case "add": {
+
+                }
+                case "Import from Json": {
+                    airline.ImportJSON(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\airline.json");
+
+                    Console.WriteLine("Files have been successfuly imported.");
+                    Console.WriteLine("Press Any key to continue...");
+                    Console.ReadKey(true);
+                    return;
+                }
+                case "Export to Json": {
+                    airline.ExportJSON(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\airline.json");
+
+                    Console.WriteLine("Files have been successfuly exported.");
+                    Console.WriteLine("Press Any key to continue...");
+                    Console.ReadKey(true);
+                    return;
+                }
+                case "exit": {
+                    Console.Clear();
+                    Console.WriteLine("bye!");
+                    Environment.Exit(0);
+                    return;
+                }
+                default: {
+                    throw new Exception($"Invalid option '{option}'");
+                }
+            }
         }
     }
 }
