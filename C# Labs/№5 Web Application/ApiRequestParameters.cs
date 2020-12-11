@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System;
 
 namespace WindowsFormsApp1 {
     class ApiRequestParameters {
 
         public string Method { get; set; }
-        public Dictionary<string, string> Parameters = new Dictionary<string, string>();
+        public StringBuilder Parameters = new StringBuilder();
 
         public ApiRequestParameters(string method) {
             Method = method;
@@ -13,17 +15,16 @@ namespace WindowsFormsApp1 {
 
         public ApiRequestParameters AddParam(string key, string value) => Add(key, value);
         public ApiRequestParameters Add(string key, string value) {
-            Parameters.Add(key, value);
+            Parameters
+                .Append("&")
+                .Append(key)
+                .Append("=")
+                .Append(Uri.EscapeUriString(value));
             return this;
         }
 
-        private string FormatParams() {
-            var args = Parameters.Select(x => string.Format($"&{x.Key}={x.Value}"));
-            return string.Join("", args);
-        }
-
         public override string ToString() {
-            return Method + "?" +FormatParams();
+            return Method + "?" + Parameters.ToString();
         }
     }
 }

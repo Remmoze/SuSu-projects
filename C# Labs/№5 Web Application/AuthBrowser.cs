@@ -23,7 +23,6 @@ namespace WindowsFormsApp1 {
         }
 
         private int AppId = 7653211;
-
         private string AccessToken { get; set; }
 
         public AuthBrowser() {
