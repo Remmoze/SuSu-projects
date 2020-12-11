@@ -28,6 +28,20 @@ namespace WindowsFormsApp1 {
             return IsTokenValid = response == "{\"response\":1337}";
         }
 
+        public string GetAccountInfo() {
+            var Account = RequestJson(new ApiRequestParameters("account.getProfileInfo"));
+            var info = new StringBuilder()
+                .Extend("First name", Account["first_name"])
+                .Extend("Last name", Account["last_name"])
+                .Extend("Id", Account["id"])
+                .Extend("Domain", Account["screen_name"])
+                .Extend("Country", Account["country"]["title"])
+                .Extend("Home Town", Account["home_town"])
+                .Extend("Birth day", Account["bdate"]);
+
+            return info.ToString();
+        }
+
         private string PerformRequest(ApiRequestParameters parameters) {
             parameters = parameters
                 .Add("access_token", AccessToken)

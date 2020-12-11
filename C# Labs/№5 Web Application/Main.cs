@@ -34,17 +34,7 @@ namespace WindowsFormsApp1 {
             LogOut.Enabled = true;
             AuthButton.Enabled = false;
 
-            var Account = connection.RequestJson(new ApiRequestParameters("account.getProfileInfo"));
-            var info = new StringBuilder()
-                .Extend("First name", Account["first_name"])
-                .Extend("Last name", Account["last_name"])
-                .Extend("Id", Account["id"])
-                .Extend("Domain", Account["screen_name"])
-                .Extend("Country", Account["country"]["title"])
-                .Extend("Home Town", Account["home_town"])
-                .Extend("Birth day", Account["bdate"]);
-
-            MainScreen.Text = info.ToString();
+            MainScreen.Text = connection.GetAccountInfo();
         }
 
         private void LogoutClick(object sender, EventArgs e) {
@@ -97,11 +87,12 @@ namespace WindowsFormsApp1 {
             }
 
             json = json[0];
-            var text = $"First name: {json["first_name"]}\n";
-            text += $"Last name: {json["last_name"]}\n";
-            text += $"Domain: {json["domain"]}\n";
-            text += $"Id: {id}\n";
-            Display2.Text = text;
+            var text = new StringBuilder()
+                .Extend("First name", json["first_name"])
+                .Extend("Last name", json["last_name"])
+                .Extend("Id", json["id"])
+                .Extend("Domain", json["domain"]);
+            Display2.Text = text.ToString();
         }
 
         private void GetUserFromDomain() {

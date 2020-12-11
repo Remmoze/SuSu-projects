@@ -41,11 +41,11 @@ namespace WindowsFormsApp1 {
             this.URLTab = new System.Windows.Forms.TabPage();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ResolveButton = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ShortenButton = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.Auth.SuspendLayout();
             this.Domains.SuspendLayout();
@@ -215,11 +215,11 @@ namespace WindowsFormsApp1 {
             // 
             this.URLTab.Controls.Add(this.textBox1);
             this.URLTab.Controls.Add(this.label3);
-            this.URLTab.Controls.Add(this.button1);
+            this.URLTab.Controls.Add(this.ResolveButton);
             this.URLTab.Controls.Add(this.richTextBox1);
             this.URLTab.Controls.Add(this.textBox2);
             this.URLTab.Controls.Add(this.label4);
-            this.URLTab.Controls.Add(this.button3);
+            this.URLTab.Controls.Add(this.ShortenButton);
             this.URLTab.Location = new System.Drawing.Point(4, 22);
             this.URLTab.Name = "URLTab";
             this.URLTab.Padding = new System.Windows.Forms.Padding(3);
@@ -245,14 +245,14 @@ namespace WindowsFormsApp1 {
             this.label3.TabIndex = 12;
             this.label3.Text = "Get original URL from shorten URL:";
             // 
-            // button1
+            // ResolveButton
             // 
-            this.button1.Location = new System.Drawing.Point(186, 71);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Resolve";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ResolveButton.Location = new System.Drawing.Point(186, 71);
+            this.ResolveButton.Name = "ResolveButton";
+            this.ResolveButton.Size = new System.Drawing.Size(56, 23);
+            this.ResolveButton.TabIndex = 11;
+            this.ResolveButton.Text = "Resolve";
+            this.ResolveButton.UseVisualStyleBackColor = true;
             // 
             // richTextBox1
             // 
@@ -282,14 +282,14 @@ namespace WindowsFormsApp1 {
             this.label4.TabIndex = 8;
             this.label4.Text = "Original URL to shorten:";
             // 
-            // button3
+            // ShortenButton
             // 
-            this.button3.Location = new System.Drawing.Point(416, 22);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(59, 23);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "Shorten!";
-            this.button3.UseVisualStyleBackColor = true;
+            this.ShortenButton.Location = new System.Drawing.Point(416, 22);
+            this.ShortenButton.Name = "ShortenButton";
+            this.ShortenButton.Size = new System.Drawing.Size(59, 23);
+            this.ShortenButton.TabIndex = 7;
+            this.ShortenButton.Text = "Shorten!";
+            this.ShortenButton.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -330,11 +330,11 @@ namespace WindowsFormsApp1 {
         private System.Windows.Forms.TabPage URLTab;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ResolveButton;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ShortenButton;
     }
 }
 
