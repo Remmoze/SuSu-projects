@@ -10,12 +10,15 @@ namespace WindowsFormsApp1 {
 
         private string FullAuthUrl {
             get {
-                var url = _AuthUrl;
-                url += "?display=page&response_type=token&v=5.126";
-                url += "&redirect_uri=" + _RedirectApi;
-                url += "&client_id=" + AppId;
-                url += "&scope=" + _Scope;
-                return url;
+                var param = new ApiRequestParameters("")
+                    .Add("display", "page")
+                    .Add("response_type", "token")
+                    .Add("v", "5.126")
+                    .Add("redirect_uri", _RedirectApi)
+                    .Add("client_id", AppId.ToString())
+                    .Add("scope", _Scope)
+                    .Add("revoke", "1");
+                return _AuthUrl + param.ToString();
             }
         }
 
@@ -45,7 +48,7 @@ namespace WindowsFormsApp1 {
                 return;
             }
 
-            // url sample: https://oauth.vk.com/blank.html#access_token=HERE&expires_in=86400
+            // url sample: https://oauth.vk.com/blank.html#access_token=HERE&expires_in=12345
             AccessToken = uri.Split('#')[1].Split('&')[0].Split('=')[1];
             DialogResult = DialogResult.Yes;
         }

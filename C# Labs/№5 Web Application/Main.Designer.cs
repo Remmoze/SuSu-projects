@@ -37,6 +37,7 @@ namespace WindowsFormsApp1 {
             this.UserId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.GetById = new System.Windows.Forms.Button();
+            this.LogOut = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.Auth.SuspendLayout();
             this.Domains.SuspendLayout();
@@ -44,9 +45,9 @@ namespace WindowsFormsApp1 {
             // 
             // AuthButton
             // 
-            this.AuthButton.Location = new System.Drawing.Point(6, 7);
+            this.AuthButton.Location = new System.Drawing.Point(6, 6);
             this.AuthButton.Name = "AuthButton";
-            this.AuthButton.Size = new System.Drawing.Size(75, 23);
+            this.AuthButton.Size = new System.Drawing.Size(107, 37);
             this.AuthButton.TabIndex = 0;
             this.AuthButton.Text = "Auth";
             this.AuthButton.UseVisualStyleBackColor = true;
@@ -57,20 +58,25 @@ namespace WindowsFormsApp1 {
             this.MainScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainScreen.Location = new System.Drawing.Point(166, 6);
+            this.MainScreen.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MainScreen.Location = new System.Drawing.Point(6, 46);
             this.MainScreen.Name = "MainScreen";
-            this.MainScreen.Size = new System.Drawing.Size(530, 348);
+            this.MainScreen.Size = new System.Drawing.Size(690, 308);
             this.MainScreen.TabIndex = 1;
             this.MainScreen.Text = "";
             // 
             // TokenStatus
             // 
+            this.TokenStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TokenStatus.AutoSize = true;
-            this.TokenStatus.Location = new System.Drawing.Point(87, 12);
+            this.TokenStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TokenStatus.Location = new System.Drawing.Point(402, 12);
             this.TokenStatus.Name = "TokenStatus";
-            this.TokenStatus.Size = new System.Drawing.Size(73, 13);
+            this.TokenStatus.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.TokenStatus.Size = new System.Drawing.Size(181, 31);
             this.TokenStatus.TabIndex = 2;
             this.TokenStatus.Text = "Not logged in.";
+            this.TokenStatus.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // Tabs
             // 
@@ -88,6 +94,7 @@ namespace WindowsFormsApp1 {
             // 
             // Auth
             // 
+            this.Auth.Controls.Add(this.LogOut);
             this.Auth.Controls.Add(this.AuthButton);
             this.Auth.Controls.Add(this.MainScreen);
             this.Auth.Controls.Add(this.TokenStatus);
@@ -183,6 +190,17 @@ namespace WindowsFormsApp1 {
             this.GetById.UseVisualStyleBackColor = true;
             this.GetById.Click += new System.EventHandler(this.GetUserByIdButtonClick);
             // 
+            // LogOut
+            // 
+            this.LogOut.Enabled = false;
+            this.LogOut.Location = new System.Drawing.Point(589, 6);
+            this.LogOut.Name = "LogOut";
+            this.LogOut.Size = new System.Drawing.Size(107, 37);
+            this.LogOut.TabIndex = 3;
+            this.LogOut.Text = "Logout";
+            this.LogOut.UseVisualStyleBackColor = true;
+            this.LogOut.Click += new System.EventHandler(this.LogoutClick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +234,7 @@ namespace WindowsFormsApp1 {
         private System.Windows.Forms.TextBox Domain;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button LogOut;
     }
 }
 

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
@@ -37,14 +30,28 @@ namespace WindowsFormsApp1 {
                 return;
             }
             TokenStatus.Text = "Logged in.";
+            LogOut.Enabled = true;
+            AuthButton.Enabled = false;
 
-            var parameters = new ApiRequestParameters("friends.get")
-                .Add("user_id", "120454958")
-                .Add("order", "hints")
-                .Add("count", "3")
-                .Add("fields", "domain");
+            var Account = connection.RequestJson(new ApiRequestParameters("account.getProfileInfo"));
+            var info = ""
+                .Extend("First name", Account["first_name"])
+                .Extend("Last name", Account["last_name"])
+                .Extend("Id", Account["id"])
+                .Extend("Domain", Account["screen_name"])
+                .Extend("Country", Account["country"]["title"])
+                .Extend("Home Town", Account["home_town"])
+                .Extend("Birth day", Account["bdate"]);
 
-            MainScreen.Text = connection.Request(parameters);
+            MainScreen.Text = info;
+        }
+
+        private void LogoutClick(object sender, EventArgs e) {
+            LogOut.Enabled = false;
+            AuthButton.Enabled = true;
+            connection = null;
+            MainScreen.Text = "";
+            TokenStatus.Text = "Not logged in.";
         }
 
         private void ChangedTab(object sender, TabControlEventArgs e) {
@@ -81,9 +88,14 @@ namespace WindowsFormsApp1 {
 
             var json = connection.RequestJson(new ApiRequestParameters("users.get")
                 .Add("user_ids", id)
-                .Add("fields", "domain"))
-                ["response"][0];
+                .Add("fields", "domain"));
 
+            if(json.Type == JTokenType.Object && json["error_msg"] != null) {
+                MessageBox.Show(json["error_msg"].ToString(), ":(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            json = json[0];
             var text = $"First name: {json["first_name"]}\n";
             text += $"Last name: {json["last_name"]}\n";
             text += $"Domain: {json["domain"]}\n";
@@ -94,10 +106,10 @@ namespace WindowsFormsApp1 {
         private void GetUserFromDomain() {
             var domain = Domain.Text;
             var json = connection.RequestJson(new ApiRequestParameters("utils.resolveScreenName")
-                .Add("screen_name", domain))["response"];
+                .Add("screen_name", domain));
 
             // returns an empty array when domain is not taken
-            if(json.Type == JTokenType.Array) { 
+            if(json.Type == JTokenType.Array) {
                 Display2.Text = "Domain is not taken.";
                 return;
             }

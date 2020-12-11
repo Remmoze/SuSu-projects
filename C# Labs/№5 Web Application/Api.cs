@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using System.Net;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 
 namespace WindowsFormsApp1 {
     class Api {
@@ -36,8 +31,7 @@ namespace WindowsFormsApp1 {
         private string PerformRequest(ApiRequestParameters parameters) {
             parameters = parameters
                 .Add("access_token", AccessToken)
-                .Add("v", ApiVersion)
-                .Add("revoke", "1");
+                .Add("v", ApiVersion);
             return Connection.DownloadString(RequestsUrl + parameters.ToString());
         }
 
@@ -45,8 +39,11 @@ namespace WindowsFormsApp1 {
             return PerformRequest(parameters);
         }
 
-        public JObject RequestJson(ApiRequestParameters parameters) {
-            return JObject.Parse(PerformRequest(parameters));
+        public JToken RequestJson(ApiRequestParameters parameters) {
+            var response = JObject.Parse(PerformRequest(parameters));
+            if(response["error"] != null)
+                return response["error"];
+            return response["response"];
         }
     }
 }
