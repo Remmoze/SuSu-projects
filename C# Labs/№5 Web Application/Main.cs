@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
@@ -34,7 +35,7 @@ namespace WindowsFormsApp1 {
             AuthButton.Enabled = false;
 
             var Account = connection.RequestJson(new ApiRequestParameters("account.getProfileInfo"));
-            var info = ""
+            var info = new StringBuilder()
                 .Extend("First name", Account["first_name"])
                 .Extend("Last name", Account["last_name"])
                 .Extend("Id", Account["id"])
@@ -43,7 +44,7 @@ namespace WindowsFormsApp1 {
                 .Extend("Home Town", Account["home_town"])
                 .Extend("Birth day", Account["bdate"]);
 
-            MainScreen.Text = info;
+            MainScreen.Text = info.ToString();
         }
 
         private void LogoutClick(object sender, EventArgs e) {

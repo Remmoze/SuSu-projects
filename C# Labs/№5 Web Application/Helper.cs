@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp1 {
     public static class Helper {
-        public static string Extend(this string str, string PropertyName, object PropertyValue) {
-            var value = PropertyValue;
-            if(string.IsNullOrEmpty(PropertyValue.ToString()))
-                value = "<empty>";
-            return str + PropertyName + ": " + value + "\n";
+
+        public static StringBuilder Extend(this StringBuilder builder, string propertyName, object propertyValue) {
+            var value = propertyValue.ToString();
+            return builder
+                .Append(propertyName)
+                .Append(": ")
+                .Append(string.IsNullOrEmpty(value) ? "<empty>" : value)
+                .AppendLine();
         }
     }
 }
