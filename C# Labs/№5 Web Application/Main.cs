@@ -121,5 +121,11 @@ namespace WindowsFormsApp1 {
 
             GetUserFromId(json["object_id"].ToString());
         }
+
+        private void GetShortUrl() {
+
+        }
+
+
     }
 }

@@ -29,6 +29,7 @@ namespace WindowsFormsApp1 {
             this.TokenStatus = new System.Windows.Forms.Label();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.Auth = new System.Windows.Forms.TabPage();
+            this.LogOut = new System.Windows.Forms.Button();
             this.Domains = new System.Windows.Forms.TabPage();
             this.Domain = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,10 +38,18 @@ namespace WindowsFormsApp1 {
             this.UserId = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.GetById = new System.Windows.Forms.Button();
-            this.LogOut = new System.Windows.Forms.Button();
+            this.URLTab = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.Auth.SuspendLayout();
             this.Domains.SuspendLayout();
+            this.URLTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // AuthButton
@@ -85,6 +94,7 @@ namespace WindowsFormsApp1 {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.Auth);
             this.Tabs.Controls.Add(this.Domains);
+            this.Tabs.Controls.Add(this.URLTab);
             this.Tabs.Location = new System.Drawing.Point(12, 12);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
@@ -106,6 +116,17 @@ namespace WindowsFormsApp1 {
             this.Auth.Text = "Auth";
             this.Auth.UseVisualStyleBackColor = true;
             // 
+            // LogOut
+            // 
+            this.LogOut.Enabled = false;
+            this.LogOut.Location = new System.Drawing.Point(589, 6);
+            this.LogOut.Name = "LogOut";
+            this.LogOut.Size = new System.Drawing.Size(107, 37);
+            this.LogOut.TabIndex = 3;
+            this.LogOut.Text = "Logout";
+            this.LogOut.UseVisualStyleBackColor = true;
+            this.LogOut.Click += new System.EventHandler(this.LogoutClick);
+            // 
             // Domains
             // 
             this.Domains.Controls.Add(this.Domain);
@@ -125,7 +146,7 @@ namespace WindowsFormsApp1 {
             // 
             // Domain
             // 
-            this.Domain.Location = new System.Drawing.Point(23, 91);
+            this.Domain.Location = new System.Drawing.Point(9, 79);
             this.Domain.Name = "Domain";
             this.Domain.Size = new System.Drawing.Size(150, 20);
             this.Domain.TabIndex = 6;
@@ -135,7 +156,7 @@ namespace WindowsFormsApp1 {
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 75);
+            this.label2.Location = new System.Drawing.Point(6, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(133, 13);
             this.label2.TabIndex = 5;
@@ -143,7 +164,7 @@ namespace WindowsFormsApp1 {
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(179, 91);
+            this.button2.Location = new System.Drawing.Point(165, 79);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(34, 23);
             this.button2.TabIndex = 4;
@@ -156,15 +177,15 @@ namespace WindowsFormsApp1 {
             this.Display2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Display2.Location = new System.Drawing.Point(219, 6);
+            this.Display2.Location = new System.Drawing.Point(205, 6);
             this.Display2.Name = "Display2";
-            this.Display2.Size = new System.Drawing.Size(477, 349);
+            this.Display2.Size = new System.Drawing.Size(491, 349);
             this.Display2.TabIndex = 3;
             this.Display2.Text = "";
             // 
             // UserId
             // 
-            this.UserId.Location = new System.Drawing.Point(23, 37);
+            this.UserId.Location = new System.Drawing.Point(9, 25);
             this.UserId.Name = "UserId";
             this.UserId.Size = new System.Drawing.Size(150, 20);
             this.UserId.TabIndex = 2;
@@ -174,7 +195,7 @@ namespace WindowsFormsApp1 {
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 21);
+            this.label1.Location = new System.Drawing.Point(6, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 13);
             this.label1.TabIndex = 1;
@@ -182,7 +203,7 @@ namespace WindowsFormsApp1 {
             // 
             // GetById
             // 
-            this.GetById.Location = new System.Drawing.Point(179, 37);
+            this.GetById.Location = new System.Drawing.Point(165, 25);
             this.GetById.Name = "GetById";
             this.GetById.Size = new System.Drawing.Size(34, 23);
             this.GetById.TabIndex = 0;
@@ -190,16 +211,85 @@ namespace WindowsFormsApp1 {
             this.GetById.UseVisualStyleBackColor = true;
             this.GetById.Click += new System.EventHandler(this.GetUserByIdButtonClick);
             // 
-            // LogOut
+            // URLTab
             // 
-            this.LogOut.Enabled = false;
-            this.LogOut.Location = new System.Drawing.Point(589, 6);
-            this.LogOut.Name = "LogOut";
-            this.LogOut.Size = new System.Drawing.Size(107, 37);
-            this.LogOut.TabIndex = 3;
-            this.LogOut.Text = "Logout";
-            this.LogOut.UseVisualStyleBackColor = true;
-            this.LogOut.Click += new System.EventHandler(this.LogoutClick);
+            this.URLTab.Controls.Add(this.textBox1);
+            this.URLTab.Controls.Add(this.label3);
+            this.URLTab.Controls.Add(this.button1);
+            this.URLTab.Controls.Add(this.richTextBox1);
+            this.URLTab.Controls.Add(this.textBox2);
+            this.URLTab.Controls.Add(this.label4);
+            this.URLTab.Controls.Add(this.button3);
+            this.URLTab.Location = new System.Drawing.Point(4, 22);
+            this.URLTab.Name = "URLTab";
+            this.URLTab.Padding = new System.Windows.Forms.Padding(3);
+            this.URLTab.Size = new System.Drawing.Size(702, 361);
+            this.URLTab.TabIndex = 2;
+            this.URLTab.Text = "Url Shortener";
+            this.URLTab.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(9, 73);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(171, 20);
+            this.textBox1.TabIndex = 13;
+            this.textBox1.Text = "https://vk.cc/2csqpF";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(174, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Get original URL from shorten URL:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(186, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Resolve";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBox1.Location = new System.Drawing.Point(9, 108);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(687, 247);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(9, 25);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(401, 20);
+            this.textBox2.TabIndex = 9;
+            this.textBox2.Text = "https://google.com/";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(120, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Original URL to shorten:";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(416, 22);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(59, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Shorten!";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -215,6 +305,8 @@ namespace WindowsFormsApp1 {
             this.Auth.PerformLayout();
             this.Domains.ResumeLayout(false);
             this.Domains.PerformLayout();
+            this.URLTab.ResumeLayout(false);
+            this.URLTab.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -235,6 +327,14 @@ namespace WindowsFormsApp1 {
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button LogOut;
+        private System.Windows.Forms.TabPage URLTab;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button3;
     }
 }
 
