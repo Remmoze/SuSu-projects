@@ -30,10 +30,13 @@ namespace WindowsFormsApp1 {
             this.Tabs = new System.Windows.Forms.TabControl();
             this.Auth = new System.Windows.Forms.TabPage();
             this.Domains = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.UserId = new System.Windows.Forms.TextBox();
+            this.Domain = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.Display2 = new System.Windows.Forms.RichTextBox();
+            this.UserId = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.GetById = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
             this.Auth.SuspendLayout();
             this.Domains.SuspendLayout();
@@ -71,6 +74,9 @@ namespace WindowsFormsApp1 {
             // 
             // Tabs
             // 
+            this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.Auth);
             this.Tabs.Controls.Add(this.Domains);
             this.Tabs.Location = new System.Drawing.Point(12, 12);
@@ -78,6 +84,7 @@ namespace WindowsFormsApp1 {
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(710, 387);
             this.Tabs.TabIndex = 3;
+            this.Tabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.ChangedTab);
             // 
             // Auth
             // 
@@ -94,10 +101,13 @@ namespace WindowsFormsApp1 {
             // 
             // Domains
             // 
+            this.Domains.Controls.Add(this.Domain);
+            this.Domains.Controls.Add(this.label2);
+            this.Domains.Controls.Add(this.button2);
             this.Domains.Controls.Add(this.Display2);
             this.Domains.Controls.Add(this.UserId);
             this.Domains.Controls.Add(this.label1);
-            this.Domains.Controls.Add(this.button1);
+            this.Domains.Controls.Add(this.GetById);
             this.Domains.Location = new System.Drawing.Point(4, 22);
             this.Domains.Name = "Domains";
             this.Domains.Padding = new System.Windows.Forms.Padding(3);
@@ -106,24 +116,44 @@ namespace WindowsFormsApp1 {
             this.Domains.Text = "Domain resolver";
             this.Domains.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // Domain
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(152, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Get user\'s domain from their Id:";
+            this.Domain.Location = new System.Drawing.Point(23, 91);
+            this.Domain.Name = "Domain";
+            this.Domain.Size = new System.Drawing.Size(150, 20);
+            this.Domain.TabIndex = 6;
+            this.Domain.Text = "durov";
+            this.Domain.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
-            // button1
+            // label2
             // 
-            this.button1.Location = new System.Drawing.Point(179, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(34, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Get";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.GetDomainButtonClick);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(133, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Get user from their domain:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(179, 91);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(34, 23);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Get";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.GetUserByDomainButtonClick);
+            // 
+            // Display2
+            // 
+            this.Display2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Display2.Location = new System.Drawing.Point(219, 6);
+            this.Display2.Name = "Display2";
+            this.Display2.Size = new System.Drawing.Size(477, 349);
+            this.Display2.TabIndex = 3;
+            this.Display2.Text = "";
             // 
             // UserId
             // 
@@ -134,13 +164,24 @@ namespace WindowsFormsApp1 {
             this.UserId.Text = "id1";
             this.UserId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckEnter);
             // 
-            // Display2
+            // label1
             // 
-            this.Display2.Location = new System.Drawing.Point(266, 6);
-            this.Display2.Name = "Display2";
-            this.Display2.Size = new System.Drawing.Size(430, 349);
-            this.Display2.TabIndex = 3;
-            this.Display2.Text = "";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Get user from their id:";
+            // 
+            // GetById
+            // 
+            this.GetById.Location = new System.Drawing.Point(179, 37);
+            this.GetById.Name = "GetById";
+            this.GetById.Size = new System.Drawing.Size(34, 23);
+            this.GetById.TabIndex = 0;
+            this.GetById.Text = "Get";
+            this.GetById.UseVisualStyleBackColor = true;
+            this.GetById.Click += new System.EventHandler(this.GetUserByIdButtonClick);
             // 
             // Main
             // 
@@ -169,9 +210,12 @@ namespace WindowsFormsApp1 {
         private System.Windows.Forms.TabPage Auth;
         private System.Windows.Forms.TabPage Domains;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button GetById;
         private System.Windows.Forms.RichTextBox Display2;
         private System.Windows.Forms.TextBox UserId;
+        private System.Windows.Forms.TextBox Domain;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button2;
     }
 }
 
