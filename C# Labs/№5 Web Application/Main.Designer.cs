@@ -39,11 +39,8 @@ namespace WindowsFormsApp1 {
             this.label1 = new System.Windows.Forms.Label();
             this.GetById = new System.Windows.Forms.Button();
             this.URLTab = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ResolveButton = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.Display3 = new System.Windows.Forms.RichTextBox();
+            this.OriginalURL = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.ShortenButton = new System.Windows.Forms.Button();
             this.Tabs.SuspendLayout();
@@ -213,11 +210,8 @@ namespace WindowsFormsApp1 {
             // 
             // URLTab
             // 
-            this.URLTab.Controls.Add(this.textBox1);
-            this.URLTab.Controls.Add(this.label3);
-            this.URLTab.Controls.Add(this.ResolveButton);
-            this.URLTab.Controls.Add(this.richTextBox1);
-            this.URLTab.Controls.Add(this.textBox2);
+            this.URLTab.Controls.Add(this.Display3);
+            this.URLTab.Controls.Add(this.OriginalURL);
             this.URLTab.Controls.Add(this.label4);
             this.URLTab.Controls.Add(this.ShortenButton);
             this.URLTab.Location = new System.Drawing.Point(4, 22);
@@ -228,50 +222,25 @@ namespace WindowsFormsApp1 {
             this.URLTab.Text = "Url Shortener";
             this.URLTab.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // Display3
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(171, 20);
-            this.textBox1.TabIndex = 13;
-            this.textBox1.Text = "https://vk.cc/2csqpF";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(174, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Get original URL from shorten URL:";
-            // 
-            // ResolveButton
-            // 
-            this.ResolveButton.Location = new System.Drawing.Point(186, 71);
-            this.ResolveButton.Name = "ResolveButton";
-            this.ResolveButton.Size = new System.Drawing.Size(56, 23);
-            this.ResolveButton.TabIndex = 11;
-            this.ResolveButton.Text = "Resolve";
-            this.ResolveButton.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Display3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(9, 108);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(687, 247);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
+            this.Display3.Location = new System.Drawing.Point(9, 51);
+            this.Display3.Name = "Display3";
+            this.Display3.Size = new System.Drawing.Size(687, 304);
+            this.Display3.TabIndex = 10;
+            this.Display3.Text = "";
             // 
-            // textBox2
+            // OriginalURL
             // 
-            this.textBox2.Location = new System.Drawing.Point(9, 25);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(401, 20);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.Text = "https://google.com/";
+            this.OriginalURL.Location = new System.Drawing.Point(9, 25);
+            this.OriginalURL.Name = "OriginalURL";
+            this.OriginalURL.Size = new System.Drawing.Size(622, 20);
+            this.OriginalURL.TabIndex = 9;
+            this.OriginalURL.Text = "https://google.com/";
+            this.OriginalURL.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EnterOriginalUrl);
             // 
             // label4
             // 
@@ -284,12 +253,13 @@ namespace WindowsFormsApp1 {
             // 
             // ShortenButton
             // 
-            this.ShortenButton.Location = new System.Drawing.Point(416, 22);
+            this.ShortenButton.Location = new System.Drawing.Point(637, 22);
             this.ShortenButton.Name = "ShortenButton";
             this.ShortenButton.Size = new System.Drawing.Size(59, 23);
             this.ShortenButton.TabIndex = 7;
             this.ShortenButton.Text = "Shorten!";
             this.ShortenButton.UseVisualStyleBackColor = true;
+            this.ShortenButton.Click += new System.EventHandler(this.ShortLinkClick);
             // 
             // Main
             // 
@@ -328,11 +298,8 @@ namespace WindowsFormsApp1 {
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button LogOut;
         private System.Windows.Forms.TabPage URLTab;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button ResolveButton;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RichTextBox Display3;
+        private System.Windows.Forms.TextBox OriginalURL;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button ShortenButton;
     }

@@ -115,9 +115,26 @@ namespace WindowsFormsApp1 {
         }
 
         private void GetShortUrl() {
-
+            var json = connection.RequestJson(new ApiRequestParameters("utils.getShortLink")
+                .Add("url", OriginalURL.Text));
+            if(json["error_msg"] != null) {
+                MessageBox.Show(json["error_msg"].ToString(), ":(", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var info = new StringBuilder()
+                .Extend("Original link", json["url"])
+                .Extend("Shorten link", json["short_url"])
+                .Extend("Id", json["key"]);
+            Display3.Text = info.ToString();
         }
 
+        private void ShortLinkClick(object sender, EventArgs e) {
+            GetShortUrl();
+        }
 
+        private void EnterOriginalUrl(object sender, KeyPressEventArgs e) {
+            if(e.KeyChar == (char)Keys.Enter)
+                GetShortUrl();
+        }
     }
 }
