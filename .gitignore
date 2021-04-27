@@ -1,3 +1,6 @@
+# custom ignores
+*.docx
+
 ## User ignores
 *.vcxproj
 *.vcxproj.filters
