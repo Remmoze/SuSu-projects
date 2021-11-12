@@ -4,17 +4,10 @@ namespace BeautySaloon
 {
     public static class HairDyeRoot
     {
-        public abstract class HairDye : IPricedHairItem
+        public abstract class HairDye : HairCommonBase
         {
-            public virtual string Style { get; }
-            public virtual int Price { get; protected set; }
-            protected virtual int DefaultPrice { get; private set; }
-            public virtual int FinalPrice() => Price;
-            public HairDye(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
+            public HairDye(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class HighlightingHairStyle : HairDye, IPricedHairItem
@@ -23,7 +16,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 160;
 
-            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class NaturalHairStyle : HairDye, IPricedHairItem
@@ -32,7 +26,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 200;
 
-            public NaturalHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public NaturalHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class DyedHairStyle : HairDye, IPricedHairItem
@@ -41,7 +36,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 140;
 
-            public DyedHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public DyedHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public static string[] AvalibleHairDye => new string[] {

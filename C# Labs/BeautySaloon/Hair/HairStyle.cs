@@ -4,18 +4,10 @@ namespace BeautySaloon
 {
     public static class HairStyleRoot
     {
-        public abstract class HairStyle : IPricedHairItem
+        public abstract class HairStyle : HairCommonBase
         {
-            public virtual string Style { get; }
-            public virtual int Price { get; protected set; }
-            protected virtual int DefaultPrice { get; private set; }
-            public virtual int FinalPrice() => Price;
-
-            public HairStyle(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
+            public HairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class CurledHairStyle : HairStyle, IPricedHairItem
@@ -24,7 +16,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 100;
 
-            public CurledHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public CurledHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class BundleHairStyle : HairStyle, IPricedHairItem
@@ -33,7 +26,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 80;
 
-            public BundleHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public BundleHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class BraidsHairStyle : HairStyle, IPricedHairItem
@@ -42,7 +36,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 300;
 
-            public BraidsHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public BraidsHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public static string[] AvalibleHairStyles => new string[] {

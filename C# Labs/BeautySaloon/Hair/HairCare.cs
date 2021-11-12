@@ -4,18 +4,10 @@ namespace BeautySaloon
 {
     public static class HairCareRoot
     {
-        public class HairCare : IPricedHairItem
+        public class HairCare : HairCommonBase
         {
-            public virtual string Style { get; }
-            public virtual int Price { get; protected set; }
-            protected virtual int DefaultPrice { get; private set; }
-            public virtual int FinalPrice() => Price;
-
-            public HairCare(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
+            public HairCare(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class WashHairCare : HairCare
@@ -24,7 +16,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 50;
 
-            public WashHairCare(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public WashHairCare(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class RestorationHairStyle : HairCare
@@ -33,7 +26,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 200;
 
-            public RestorationHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public RestorationHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class BalmHairStyle : HairCare
@@ -42,7 +36,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 100;
 
-            public BalmHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public BalmHairStyle(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class TipsHairStyle : HairCare

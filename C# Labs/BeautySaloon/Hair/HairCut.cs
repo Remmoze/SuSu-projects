@@ -4,18 +4,10 @@ namespace BeautySaloon
 {
     public static class HairCutRoot
     {
-        public abstract class HairCut : IPricedHairItem
+        public abstract class HairCut : HairCommonBase
         {
-            public virtual string Style { get; }
-            public virtual int Price { get; protected set; }
-            protected virtual int DefaultPrice { get; private set; }
-            public virtual int FinalPrice() => Price;
-
-            public HairCut(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
+            public HairCut(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class BobbedHairCut : HairCut, IPricedHairItem
@@ -24,7 +16,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 300;
 
-            public BobbedHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public BobbedHairCut(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class FoxTailHairCut : HairCut, IPricedHairItem
@@ -33,7 +26,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 300;
 
-            public FoxTailHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public FoxTailHairCut(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
         }
 
         public class BangHairCut : HairCut, IPricedHairItem
@@ -42,7 +36,8 @@ namespace BeautySaloon
             public override string Style => Type;
             protected override int DefaultPrice => 300;
 
-            public BangHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+            public BangHairCut(HairLengthRoot.HairLength hairLength)
+            : base(hairLength) { }
     }
 
         public static string[] AvalibleHaircuts => new string[] {
