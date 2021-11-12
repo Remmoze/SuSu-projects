@@ -4,11 +4,18 @@ namespace BeautySaloon
 {
     public static class HairCutRoot
     {
-        public abstract class HairCut
+        public abstract class HairCut : IPricedHairItem
         {
-            public abstract string Style { get; }
-            protected abstract int DefaultPrice { get; }
-            public abstract int FinalPrice();
+            public virtual string Style { get; }
+            public virtual int Price { get; protected set; }
+            protected virtual int DefaultPrice { get; private set; }
+            public virtual int FinalPrice() => Price;
+
+            public HairCut(HairLengthRoot.HairLength hairLength) =>
+                Price = CalculatePrice(hairLength);
+
+            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
         }
 
         public class BobbedHairCut : HairCut, IPricedHairItem
@@ -16,15 +23,8 @@ namespace BeautySaloon
             public const string Type = "Каре";
             public override string Style => Type;
             protected override int DefaultPrice => 300;
-            public int Price { get; private set; }
 
-            public BobbedHairCut(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public BobbedHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
         public class FoxTailHairCut : HairCut, IPricedHairItem
@@ -32,15 +32,8 @@ namespace BeautySaloon
             public const string Type = "Лисий хвост";
             public override string Style => Type;
             protected override int DefaultPrice => 300;
-            public int Price { get; private set; }
 
-            public FoxTailHairCut(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public FoxTailHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
         public class BangHairCut : HairCut, IPricedHairItem
@@ -48,16 +41,9 @@ namespace BeautySaloon
             public const string Type = "Челка";
             public override string Style => Type;
             protected override int DefaultPrice => 300;
-            public int Price { get; private set; }
 
-            public BangHairCut(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
-        }
+            public BangHairCut(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
+    }
 
         public static string[] AvalibleHaircuts => new string[] {
             BobbedHairCut.Type,

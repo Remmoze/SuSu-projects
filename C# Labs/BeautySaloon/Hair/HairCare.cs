@@ -4,77 +4,58 @@ namespace BeautySaloon
 {
     public static class HairCareRoot
     {
-        public abstract class HairCare
+        public class HairCare : IPricedHairItem
         {
-            public abstract string Style { get; }
-            protected abstract int DefaultPrice { get; }
-            public abstract int FinalPrice();
+            public virtual string Style { get; }
+            public virtual int Price { get; protected set; }
+            protected virtual int DefaultPrice { get; private set; }
+            public virtual int FinalPrice() => Price;
+
+            public HairCare(HairLengthRoot.HairLength hairLength) =>
+                Price = CalculatePrice(hairLength);
+
+            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
         }
 
-        public class WashHairCare : HairCare, IPricedHairItem
+        public class WashHairCare : HairCare
         {
             public const string Type = "Мытье";
             public override string Style => Type;
             protected override int DefaultPrice => 50;
-            public int Price { get; private set; }
 
-            public WashHairCare(HairLengthRoot.HairLength hairLength)
-            {
-                Price = CalculatePrice(hairLength);
-            }
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) => 
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public WashHairCare(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
-        public class RestorationHairStyle : HairCare, IPricedHairItem
+        public class RestorationHairStyle : HairCare
         {
             public const string Type = "Восстановление";
             public override string Style => Type;
             protected override int DefaultPrice => 200;
-            public int Price { get; private set; }
 
-            public RestorationHairStyle(HairLengthRoot.HairLength hairLength) => 
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public RestorationHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
-        public class BalmHairStyle : HairCare, IPricedHairItem
+        public class BalmHairStyle : HairCare
         {
             public const string Type = "Бальзамы";
             public override string Style => Type;
             protected override int DefaultPrice => 100;
-            public int Price { get; private set; }
 
-            public BalmHairStyle(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public BalmHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
-        public class TipsHairStyle : HairCare, IPricedHairItem
+        public class TipsHairStyle : HairCare
         {
             public const string Type = "Кончики";
             public override string Style => Type;
             protected override int DefaultPrice => 90;
-            public int Price { get; private set; }
 
-            public TipsHairStyle(HairLengthRoot.HairLength hairLength) =>
+            public TipsHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) =>
                 Price = CalculatePrice(hairLength);
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice;
-
-            public override int FinalPrice() => Price;
+            public override int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice; // Длина волос не важна для кончиков
         }
 
         public static string[] AvaliableCare => new string[] {
@@ -96,5 +77,5 @@ namespace BeautySaloon
             }
         }
     }
-    
+
 }

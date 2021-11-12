@@ -4,46 +4,39 @@ namespace BeautySaloon
 {
     public static class HairAccessoryRoot
     {
-        public abstract class HairAccessory
+        public abstract class HairAccessory : IPricedItem
         {
-            public abstract string Style { get; }
-            public abstract int FinalPrice();
+            public virtual string Style { get; }
+            public virtual int Price { get; private set; }
+            public virtual int FinalPrice() => Price;
         }
 
-        public class Hairpins : HairAccessory, IPricedItem
+        public class Hairpins : HairAccessory
         {
             public const string Type = "Заколки";
             public override string Style => Type;
-            public virtual int Price => 50;
-
-            public override int FinalPrice() => Price;
+            public override int Price => 50;
         }
 
         public class InvisibleHairpins : HairAccessory, IPricedItem
         {
             public const string Type = "Невидимки";
             public override string Style => Type;
-            public int Price => 50;
-
-            public override int FinalPrice() => Price;
+            public override int Price => 50;
         }
 
         public class Headbands : HairAccessory, IPricedItem
         {
             public const string Type = "Ободки";
             public override string Style => Type;
-            public int Price => 60;
-
-            public override int FinalPrice() => Price;
+            public override int Price => 60;
         }
 
         public class Combs : HairAccessory, IPricedItem
         {
             public const string Type = "Гребешки";
             public override string Style => Type;
-            public int Price => 70;
-
-            public override int FinalPrice() => Price;
+            public override int Price => 70;
         }
 
         public static string[] AvaliableAccessories => new string[] {

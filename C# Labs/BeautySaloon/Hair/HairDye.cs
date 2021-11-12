@@ -4,11 +4,17 @@ namespace BeautySaloon
 {
     public static class HairDyeRoot
     {
-        public abstract class HairDye
+        public abstract class HairDye : IPricedHairItem
         {
-            public abstract string Style { get; }
-            protected abstract int DefaultPrice { get; }
-            public abstract int FinalPrice();
+            public virtual string Style { get; }
+            public virtual int Price { get; protected set; }
+            protected virtual int DefaultPrice { get; private set; }
+            public virtual int FinalPrice() => Price;
+            public HairDye(HairLengthRoot.HairLength hairLength) =>
+                Price = CalculatePrice(hairLength);
+
+            public virtual int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
         }
 
         public class HighlightingHairStyle : HairDye, IPricedHairItem
@@ -16,15 +22,8 @@ namespace BeautySaloon
             public const string Type = "Мелирование";
             public override string Style => Type;
             protected override int DefaultPrice => 160;
-            public int Price { get; private set; }
 
-            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
         public class NaturalHairStyle : HairDye, IPricedHairItem
@@ -32,15 +31,8 @@ namespace BeautySaloon
             public const string Type = "Естественное";
             public override string Style => Type;
             protected override int DefaultPrice => 200;
-            public int Price { get; private set; }
 
-            public NaturalHairStyle(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public NaturalHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
         public class DyedHairStyle : HairDye, IPricedHairItem
@@ -48,15 +40,8 @@ namespace BeautySaloon
             public const string Type = "Цветное";
             public override string Style => Type;
             protected override int DefaultPrice => 140;
-            public int Price { get; private set; }
 
-            public DyedHairStyle(HairLengthRoot.HairLength hairLength) =>
-                Price = CalculatePrice(hairLength);
-
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
-                Price = DefaultPrice * hairLength.PriceMultiplier;
-
-            public override int FinalPrice() => Price;
+            public DyedHairStyle(HairLengthRoot.HairLength hairLength) : base(hairLength) { }
         }
 
         public static string[] AvalibleHairDye => new string[] {
