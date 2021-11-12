@@ -28,7 +28,6 @@ namespace BeautySaloon
                 return Price = DefaultPrice * hairLength.PriceMultiplier;
             }
 
-
             public override int FinalPrice()
             {
                 return Price;
