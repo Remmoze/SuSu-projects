@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BeautySaloon
 {
-    public class Menu
+    public static class Menu
     {
-        public Service GetNewService()
+        public static Service GetNewService()
         {
             return SelectServices(new Service() {
                 Client = GetClient(),
@@ -62,30 +62,18 @@ namespace BeautySaloon
             );
 
             Console.WriteLine("Выберете украшения:");
-            var Accessorieschoices = Helper.MultipleOptionsSelector(HairAccessoryRoot.AvaliableAccessories);
+            var selectedAccessories = Helper.MultipleOptionsSelector(HairAccessoryRoot.AvaliableAccessories);
             var accessories = new List<HairAccessoryRoot.HairAccessory>();
-            foreach (var choice in Accessorieschoices) {
-                accessories.Add(HairAccessoryRoot.SelectAccessories(choice));
-            }
-            if (accessories.Contains(null)) {
-                service.Accessories = null;
-            }
-            else {
-                service.Accessories = accessories;
-            }
+
+            selectedAccessories.ForEach(choice => accessories.Add(HairAccessoryRoot.SelectAccessories(choice)));
+            service.Accessories = accessories.Contains(null) ? null :  accessories;
 
             Console.WriteLine("Выберете уход:");
-            var CareChoices = Helper.MultipleOptionsSelector(HairCareRoot.AvaliableCare);
+            var SelectedCare = Helper.MultipleOptionsSelector(HairCareRoot.AvaliableCare);
             var cares = new List<HairCareRoot.HairCare>();
-            foreach (var choice in CareChoices) {
-                cares.Add(HairCareRoot.SelectCare(choice, service.Client.HairLength));
-            }
-            if (cares.Contains(null)) {
-                service.Care = null;
-            }
-            else {
-                service.Care = cares;
-            }
+
+            SelectedCare.ForEach(choice => cares.Add(HairCareRoot.SelectCare(choice, service.Client.HairLength)));
+            service.Care = cares.Contains(null) ? service.Care = null : cares;
 
             Console.Clear();
             return service;

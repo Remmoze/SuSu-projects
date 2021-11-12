@@ -4,12 +4,9 @@ namespace BeautySaloon
 {
     class BeautySaloon
     {
-        public static Menu ServiceSelector;
         public static void Main(string[] args)
         {
-            ServiceSelector = new Menu();
-            var service = ServiceSelector.GetNewService();
-
+            var service = Menu.GetNewService();
             Console.WriteLine(service); 
         }
     }

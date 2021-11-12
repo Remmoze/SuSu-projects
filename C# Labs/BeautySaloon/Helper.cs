@@ -10,7 +10,7 @@ namespace BeautySaloon
         {
             while (true) {
                 for (var i = 0; i < options.Length; i++) {
-                    Console.WriteLine($"{i + 1}. " + options[i]);
+                    Console.WriteLine($"{i + 1}. {options[i]}");
                 }
                 Console.Write("Введите число: ");
 
@@ -37,7 +37,7 @@ namespace BeautySaloon
         {
             while (true) {
                 for (var i = 0; i < options.Length; i++) {
-                    Console.WriteLine($"{i + 1}. " + options[i]);
+                    Console.WriteLine($"{i + 1}. {options[i]}");
                 }
                 Console.Write("Введите числа: ");
                 var inputs = Console.ReadLine().Split(" ");
@@ -48,9 +48,7 @@ namespace BeautySaloon
                 }
 
                 var output = new List<string>();
-                foreach(var index in indexes) {
-                    output.Add(options[index-1]);
-                }
+                indexes.ForEach(index => output.Add(options[index - 1]));
 
                 return output;
             }

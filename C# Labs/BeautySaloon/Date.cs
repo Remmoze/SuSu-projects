@@ -24,7 +24,7 @@
 
         public override string ToString()
         {
-            return $"{Hour.ToString("D2")}:{Minutes.ToString("D2")} ({TimeOfDay})";
+            return $"{Hour:D2}:{Minutes:D2} ({TimeOfDay})";
         }
     }
 }

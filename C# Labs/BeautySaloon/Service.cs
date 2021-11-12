@@ -21,12 +21,16 @@ namespace BeautySaloon
             int totalPrice = 0;
             totalPrice += Haircut.FinalPrice();
             totalPrice += HairStyle.FinalPrice();
+
             if (HairDye != null)
                 totalPrice += HairDye.FinalPrice();
+
             if (Accessories != null)
                 totalPrice += Accessories.Sum(accessory => accessory.FinalPrice());
+
             if (Care != null)
                 totalPrice += Care.Sum(care => care.FinalPrice());
+
             totalPrice += Barber.Price;
             return totalPrice;
         }
