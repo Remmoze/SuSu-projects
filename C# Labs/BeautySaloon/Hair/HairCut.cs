@@ -1,78 +1,98 @@
-﻿namespace BeautySaloon
+﻿using System;
+
+namespace BeautySaloon
 {
-    public abstract class HairCut
+    public static class HairCutRoot
     {
-        public abstract string Style { get; }
-        protected abstract int DefaultPrice { get; }
-        public abstract int FinalPrice();
-    }
-
-    public class BobbedHairCut : HairCut, IPricedHairItem
-    {
-        public const string Type = "Каре";
-        public override string Style => Type;
-        protected override int DefaultPrice => 300;
-        public int Price { get; private set; }
-
-        public BobbedHairCut(HairLength hairLength)
+        public abstract class HairCut
         {
-            Price = CalculatePrice(hairLength);
+            public abstract string Style { get; }
+            protected abstract int DefaultPrice { get; }
+            public abstract int FinalPrice();
         }
 
-        public int CalculatePrice(HairLength hairLength)
+        public class BobbedHairCut : HairCut, IPricedHairItem
         {
-            return Price = DefaultPrice * hairLength.PriceMultiplier;
+            public const string Type = "Каре";
+            public override string Style => Type;
+            protected override int DefaultPrice => 300;
+            public int Price { get; private set; }
+
+            public BobbedHairCut(HairLengthRoot.HairLength hairLength)
+            {
+                Price = CalculatePrice(hairLength);
+            }
+
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
+            {
+                return Price = DefaultPrice * hairLength.PriceMultiplier;
+            }
+
+            public override int FinalPrice()
+            {
+                return Price;
+            }
         }
 
-        public override int FinalPrice()
+        public class FoxTailHairCut : HairCut, IPricedHairItem
         {
-            return Price;
-        }
-    }
+            public const string Type = "Лисий хвост";
+            public override string Style => Type;
+            protected override int DefaultPrice => 300;
+            public int Price { get; private set; }
 
-    public class FoxTailHairCut : HairCut, IPricedHairItem
-    {
-        public const string Type = "Лисий хвост";
-        public override string Style => Type;
-        protected override int DefaultPrice => 300;
-        public int Price { get; private set; }
+            public FoxTailHairCut(HairLengthRoot.HairLength hairLength)
+            {
+                Price = CalculatePrice(hairLength);
+            }
 
-        public FoxTailHairCut(HairLength hairLength)
-        {
-            Price = CalculatePrice(hairLength);
-        }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
+            {
+                return Price = DefaultPrice * hairLength.PriceMultiplier;
+            }
 
-        public int CalculatePrice(HairLength hairLength)
-        {
-            return Price = DefaultPrice * hairLength.PriceMultiplier;
-        }
-
-        public override int FinalPrice()
-        {
-            return Price;
-        }
-    }
-
-    public class BangHairCut : HairCut, IPricedHairItem
-    {
-        public const string Type = "Челка";
-        public override string Style => Type;
-        protected override int DefaultPrice => 300;
-        public int Price { get; private set; }
-
-        public BangHairCut(HairLength hairLength)
-        {
-            Price = CalculatePrice(hairLength);
+            public override int FinalPrice()
+            {
+                return Price;
+            }
         }
 
-        public int CalculatePrice(HairLength hairLength)
+        public class BangHairCut : HairCut, IPricedHairItem
         {
-            return Price = DefaultPrice * hairLength.PriceMultiplier;
+            public const string Type = "Челка";
+            public override string Style => Type;
+            protected override int DefaultPrice => 300;
+            public int Price { get; private set; }
+
+            public BangHairCut(HairLengthRoot.HairLength hairLength)
+            {
+                Price = CalculatePrice(hairLength);
+            }
+
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
+            {
+                return Price = DefaultPrice * hairLength.PriceMultiplier;
+            }
+
+            public override int FinalPrice()
+            {
+                return Price;
+            }
         }
 
-        public override int FinalPrice()
+        public static string[] AvalibleHaircuts => new string[] {
+            BobbedHairCut.Type,
+            FoxTailHairCut.Type,
+            BangHairCut.Type
+        };
+        public static HairCut SelectHaircut(string type, HairLengthRoot.HairLength length)
         {
-            return Price;
+            switch (type) {
+                case BobbedHairCut.Type: return new BobbedHairCut(length);
+                case FoxTailHairCut.Type: return new FoxTailHairCut(length);
+                case BangHairCut.Type: return new BangHairCut(length);
+                default: throw new Exception("Unknown Haircut");
+            }
         }
     }
 }

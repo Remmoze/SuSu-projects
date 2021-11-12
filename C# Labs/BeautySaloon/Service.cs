@@ -6,14 +6,14 @@ namespace BeautySaloon
 {
     public class Service
     {
-        public HairCut Haircut { get; set; }
-        public HairStyle HairStyle { get; set; }
-        public HairDye HairDye { get; set; }
-        public List<HairAccessory> Accessories { get; set; }
-        public List<HairCare> Care { get; set; }
+        public HairCutRoot.HairCut Haircut { get; set; }
+        public HairStyleRoot.HairStyle HairStyle { get; set; }
+        public HairDyeRoot.HairDye HairDye { get; set; }
+        public List<HairAccessoryRoot.HairAccessory> Accessories { get; set; }
+        public List<HairCareRoot.HairCare> Care { get; set; }
 
         public Client Client { get; set; }
-        public Barber Barber { get; set; }
+        public BarberRoot.Barber Barber { get; set; }
         public Date Date { get; set; }
 
         public int CalculatePrice()

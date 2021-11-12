@@ -7,6 +7,6 @@
 
     public interface IPricedHairItem : IPricedItem
     {
-        public int CalculatePrice(HairLength hairLength);
+        public int CalculatePrice(HairLengthRoot.HairLength hairLength);
     }
 }

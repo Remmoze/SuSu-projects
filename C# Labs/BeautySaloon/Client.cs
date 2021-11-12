@@ -2,9 +2,9 @@
 {
     public class Client
     {
-        public HairLength HairLength { get; }
+        public HairLengthRoot.HairLength HairLength { get; }
         public string Name { get; }
-        public Client(string name, HairLength length)
+        public Client(string name, HairLengthRoot.HairLength length)
         {
             Name = name;
             HairLength = length;
