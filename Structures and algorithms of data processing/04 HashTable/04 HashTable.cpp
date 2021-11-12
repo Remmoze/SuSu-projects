@@ -101,7 +101,7 @@ int main() {
 	char* word = (char*)calloc(128, sizeof(char));
 	// символ для ввода
 	char input;
-	printf("Commands: # - exit, + - add, % - print table, ? - get specific character count\n");
+	printf("Commands: '#' - exit, '+' - add, '&' - print table, '?' - get specific character count\n");
 	while(true) {
 		printf("input: ");
 		std::cin >> input;
@@ -116,7 +116,7 @@ int main() {
 			printf("count: %i\n", lookup(input));
 		} 
 		// печать таблицы
-		else if(input == '%') {
+		else if(input == '&') {
 			print();
 		}
 
