@@ -18,20 +18,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 160;
             public int Price { get; private set; }
 
-            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public HighlightingHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class NaturalHairStyle : HairDye, IPricedHairItem
@@ -41,20 +34,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 200;
             public int Price { get; private set; }
 
-            public NaturalHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public NaturalHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class DyedHairStyle : HairDye, IPricedHairItem
@@ -64,20 +50,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 140;
             public int Price { get; private set; }
 
-            public DyedHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public DyedHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public static string[] AvalibleHairDye => new string[] {

@@ -16,10 +16,7 @@ namespace BeautySaloon
             public override string Style => Type;
             public virtual int Price => 50;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class InvisibleHairpins : HairAccessory, IPricedItem
@@ -28,10 +25,7 @@ namespace BeautySaloon
             public override string Style => Type;
             public int Price => 50;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class Headbands : HairAccessory, IPricedItem
@@ -40,10 +34,7 @@ namespace BeautySaloon
             public override string Style => Type;
             public int Price => 60;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class Combs : HairAccessory, IPricedItem
@@ -52,10 +43,7 @@ namespace BeautySaloon
             public override string Style => Type;
             public int Price => 70;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public static string[] AvaliableAccessories => new string[] {

@@ -19,20 +19,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 100;
             public int Price { get; private set; }
 
-            public CurledHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public CurledHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class BundleHairStyle : HairStyle, IPricedHairItem
@@ -42,20 +35,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 80;
             public int Price { get; private set; }
 
-            public BundleHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public BundleHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class BraidsHairStyle : HairStyle, IPricedHairItem
@@ -65,21 +51,15 @@ namespace BeautySaloon
             protected override int DefaultPrice => 300;
             public int Price { get; private set; }
 
-            public BraidsHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public BraidsHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
+
         public static string[] AvalibleHairStyles => new string[] {
             CurledHairStyle.Type,
             BundleHairStyle.Type,

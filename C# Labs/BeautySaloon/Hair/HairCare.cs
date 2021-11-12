@@ -23,15 +23,10 @@ namespace BeautySaloon
                 Price = CalculatePrice(hairLength);
             }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) => 
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class RestorationHairStyle : HairCare, IPricedHairItem
@@ -41,20 +36,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 200;
             public int Price { get; private set; }
 
-            public RestorationHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public RestorationHairStyle(HairLengthRoot.HairLength hairLength) => 
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class BalmHairStyle : HairCare, IPricedHairItem
@@ -64,20 +52,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 100;
             public int Price { get; private set; }
 
-            public BalmHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public BalmHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class TipsHairStyle : HairCare, IPricedHairItem
@@ -87,20 +68,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 90;
             public int Price { get; private set; }
 
-            public TipsHairStyle(HairLengthRoot.HairLength hairLength)
-            {
+            public TipsHairStyle(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public static string[] AvaliableCare => new string[] {

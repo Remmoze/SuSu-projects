@@ -18,20 +18,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 300;
             public int Price { get; private set; }
 
-            public BobbedHairCut(HairLengthRoot.HairLength hairLength)
-            {
+            public BobbedHairCut(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class FoxTailHairCut : HairCut, IPricedHairItem
@@ -41,20 +34,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 300;
             public int Price { get; private set; }
 
-            public FoxTailHairCut(HairLengthRoot.HairLength hairLength)
-            {
+            public FoxTailHairCut(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public class BangHairCut : HairCut, IPricedHairItem
@@ -64,20 +50,13 @@ namespace BeautySaloon
             protected override int DefaultPrice => 300;
             public int Price { get; private set; }
 
-            public BangHairCut(HairLengthRoot.HairLength hairLength)
-            {
+            public BangHairCut(HairLengthRoot.HairLength hairLength) =>
                 Price = CalculatePrice(hairLength);
-            }
 
-            public int CalculatePrice(HairLengthRoot.HairLength hairLength)
-            {
-                return Price = DefaultPrice * hairLength.PriceMultiplier;
-            }
+            public int CalculatePrice(HairLengthRoot.HairLength hairLength) =>
+                Price = DefaultPrice * hairLength.PriceMultiplier;
 
-            public override int FinalPrice()
-            {
-                return Price;
-            }
+            public override int FinalPrice() => Price;
         }
 
         public static string[] AvalibleHaircuts => new string[] {
