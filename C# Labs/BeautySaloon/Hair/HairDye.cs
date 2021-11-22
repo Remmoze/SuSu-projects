@@ -10,7 +10,7 @@ namespace BeautySaloon
             : base(hairLength) { }
         }
 
-        public class HighlightingHairStyle : HairDye, IPricedHairItem
+        public class HighlightingHairStyle : HairDye
         {
             public const string Type = "Мелирование";
             public override string Style => Type;
@@ -20,7 +20,7 @@ namespace BeautySaloon
             : base(hairLength) { }
         }
 
-        public class NaturalHairStyle : HairDye, IPricedHairItem
+        public class NaturalHairStyle : HairDye
         {
             public const string Type = "Естественное";
             public override string Style => Type;
@@ -30,7 +30,7 @@ namespace BeautySaloon
             : base(hairLength) { }
         }
 
-        public class DyedHairStyle : HairDye, IPricedHairItem
+        public class DyedHairStyle : HairDye
         {
             public const string Type = "Цветное";
             public override string Style => Type;

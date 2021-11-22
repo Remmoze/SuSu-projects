@@ -11,7 +11,6 @@
             Hour = hours;
             Minutes = minutes;
 
-            Hour %= 24;
             if (Hour < 6)
                 TimeOfDay = "Ночь";
             else if (Hour < 12)

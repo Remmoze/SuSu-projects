@@ -36,6 +36,7 @@ namespace BeautySaloon
             MediumHairLength.Type,
             ShortHairLength.Type
         };
+
         public static HairLength SelectHairLength(string type)
         {
             switch (type) {

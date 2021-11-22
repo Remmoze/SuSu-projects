@@ -66,7 +66,7 @@ namespace BeautySaloon
             var accessories = new List<HairAccessoryRoot.HairAccessory>();
 
             selectedAccessories.ForEach(choice => accessories.Add(HairAccessoryRoot.SelectAccessories(choice)));
-            service.Accessories = accessories.Contains(null) ? null :  accessories;
+            service.Accessories = accessories.Contains(null) ? null : accessories;
 
             Console.WriteLine("Выберете уход:");
             var SelectedCare = Helper.MultipleOptionsSelector(HairCareRoot.AvaliableCare);
