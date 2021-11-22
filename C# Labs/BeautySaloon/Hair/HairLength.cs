@@ -1,49 +1,61 @@
-﻿using System;
-
-namespace BeautySaloon
+﻿namespace BeautySaloon
 {
-    public static class HairLengthRoot
+    public abstract class HairLength
     {
-        public abstract class HairLength
+        public abstract string Length { get; }
+        public abstract int PriceMultiplier { get; }
+    }
+
+    public class LongHairLength : HairLength
+    {
+        public override string Length
         {
-            public abstract string Length { get; }
-            public abstract int PriceMultiplier { get; }
+            get
+            {
+                return "Длинные";
+            }
         }
-
-        public class LongHairLength : HairLength
+        public override int PriceMultiplier
         {
-            public const string Type = "Длинные";
-            public override string Length => Type;
-            public override int PriceMultiplier => 3;
+            get
+            {
+                return 3;
+            }
         }
+    }
 
-        public class MediumHairLength : HairLength
+    public class MediumHairLength : HairLength
+    {
+        public override string Length
         {
-            public const string Type = "Средние";
-            public override string Length => Type;
-            public override int PriceMultiplier => 2;
+            get
+            {
+                return "Средние";
+            }
         }
-
-        public class ShortHairLength : HairLength
+        public override int PriceMultiplier
         {
-            public const string Type = "Короткие";
-            public override string Length => Type;
-            public override int PriceMultiplier => 1;
+            get
+            {
+                return 2;
+            }
         }
+    }
 
-        public static string[] AvaliableHairLength => new string[] {
-            LongHairLength.Type,
-            MediumHairLength.Type,
-            ShortHairLength.Type
-        };
-
-        public static HairLength SelectHairLength(string type)
+    public class ShortHairLength : HairLength
+    {
+        public override string Length
         {
-            switch (type) {
-                case LongHairLength.Type: return new LongHairLength();
-                case MediumHairLength.Type: return new MediumHairLength();
-                case ShortHairLength.Type: return new ShortHairLength();
-                default: throw new Exception("Unknown Hair Length");
+            get
+            {
+                return "Короткие";
+            }
+        }
+        public override int PriceMultiplier
+        {
+            get
+            {
+                return 1;
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BeautySaloon
 {
@@ -7,11 +6,11 @@ namespace BeautySaloon
     {
         public static Service GetNewService()
         {
-            return SelectServices(new Service() {
-                Client = GetClient(),
-                Date = SelectDate(),
-                Barber = SelectBarber()
-            });
+            var client = GetClient();
+            var barber = SelectBarber();
+            var date = SelectDate();
+            var service = new Service(client, barber, date);
+            return SelectServices(service);
         }
 
         private static Client GetClient()
@@ -19,7 +18,14 @@ namespace BeautySaloon
             Console.Write("Ваше имя: ");
             var name = Console.ReadLine();
             Console.WriteLine("Ваша длина волос: ");
-            HairLengthRoot.HairLength hair = HairLengthRoot.SelectHairLength(Helper.OptionsSelector(HairLengthRoot.AvaliableHairLength));
+            string hairlength = Helper.OptionsSelector(new string[] { "Длинные", "Средние", "Короткие" });
+            HairLength hair;
+            switch (hairlength) {
+                case "Длинные": hair = new LongHairLength(); break;
+                case "Средние": hair = new MediumHairLength(); break;
+                case "Короткие": hair = new ShortHairLength(); break;
+                default: throw new Exception("Unknown hair length");
+            }
             Console.Clear();
             return new Client(name, hair);
         }
@@ -33,48 +39,26 @@ namespace BeautySaloon
             return new Date(hour, minutes);
         }
 
-        private static BarberRoot.Barber SelectBarber()
+        private static Barber SelectBarber()
         {
             Console.WriteLine("Выберете мастера: ");
-            var barber = BarberRoot.SelectBarber(Helper.OptionsSelector(BarberRoot.AvaliableBarber));
+            var barber = Helper.OptionsSelector(new string[] { "Старший", "Средний", "Младший" });
             Console.Clear();
-            return barber;
+            switch (barber) {
+                case "Старший": return new ExperiencedBarber();
+                case "Средний": return new IntermediateBarber();
+                case "Младший": return new BeginnerBarber();
+                default: throw new Exception("Unknown barber");
+            }
         }
 
         private static Service SelectServices(Service service)
         {
-            Console.WriteLine("Выберете стрижку:");
-            service.Haircut = HairCutRoot.SelectHaircut(
-                Helper.OptionsSelector(HairCutRoot.AvalibleHaircuts),
-                service.Client.HairLength
-            );
-
-            Console.WriteLine("Выберете прическу:");
-            service.HairStyle = HairStyleRoot.SelectHairStyle(
-                Helper.OptionsSelector(HairStyleRoot.AvalibleHairStyles),
-                service.Client.HairLength
-            );
-
-            Console.WriteLine("Выберете окрашивание:");
-            service.HairDye = HairDyeRoot.SelectHairDye(
-                Helper.OptionsSelector(HairDyeRoot.AvalibleHairDye),
-                service.Client.HairLength
-            );
-
-            Console.WriteLine("Выберете украшения:");
-            var selectedAccessories = Helper.MultipleOptionsSelector(HairAccessoryRoot.AvaliableAccessories);
-            var accessories = new List<HairAccessoryRoot.HairAccessory>();
-
-            selectedAccessories.ForEach(choice => accessories.Add(HairAccessoryRoot.SelectAccessories(choice)));
-            service.Accessories = accessories.Contains(null) ? null : accessories;
-
-            Console.WriteLine("Выберете уход:");
-            var SelectedCare = Helper.MultipleOptionsSelector(HairCareRoot.AvaliableCare);
-            var cares = new List<HairCareRoot.HairCare>();
-
-            SelectedCare.ForEach(choice => cares.Add(HairCareRoot.SelectCare(choice, service.Client.HairLength)));
-            service.Care = cares.Contains(null) ? service.Care = null : cares;
-
+            service.Haircut = Helper.GetBool("Нужна ли вам стрижка?") ? new HairCut(service.Client.HairLength) : null;
+            service.HairStyle = Helper.GetBool("Нужна ли вам прическа?") ? new HairStyle(service.Client.HairLength) : null;
+            service.HairDye = Helper.GetBool("Нужно ли вам окрашивание?") ? new HairDye(service.Client.HairLength) : null;
+            service.Accessories = Helper.GetBool("Нужны ли вам украшения?") ? new HairAccessory() : null;
+            service.Care = Helper.GetBool("Нужен ли вам уход за волосами?") ? new HairCare(service.Client.HairLength) : null;
             Console.Clear();
             return service;
         }

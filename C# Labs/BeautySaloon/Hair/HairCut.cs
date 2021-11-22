@@ -1,58 +1,15 @@
-﻿using System;
-
-namespace BeautySaloon
+﻿namespace BeautySaloon
 {
-    public static class HairCutRoot
+    public class HairCut : HairBase
     {
-        public abstract class HairCut : HairCommonBase
+        public override int Price
         {
-            public HairCut(HairLengthRoot.HairLength hairLength)
-            : base(hairLength) { }
-        }
-
-        public class BobbedHairCut : HairCut, IPricedHairItem
-        {
-            public const string Type = "Каре";
-            public override string Style => Type;
-            protected override int DefaultPrice => 300;
-
-            public BobbedHairCut(HairLengthRoot.HairLength hairLength)
-            : base(hairLength) { }
-        }
-
-        public class FoxTailHairCut : HairCut, IPricedHairItem
-        {
-            public const string Type = "Лисий хвост";
-            public override string Style => Type;
-            protected override int DefaultPrice => 300;
-
-            public FoxTailHairCut(HairLengthRoot.HairLength hairLength)
-            : base(hairLength) { }
-        }
-
-        public class BangHairCut : HairCut, IPricedHairItem
-        {
-            public const string Type = "Челка";
-            public override string Style => Type;
-            protected override int DefaultPrice => 300;
-
-            public BangHairCut(HairLengthRoot.HairLength hairLength)
-            : base(hairLength) { }
-    }
-
-        public static string[] AvalibleHaircuts => new string[] {
-            BobbedHairCut.Type,
-            FoxTailHairCut.Type,
-            BangHairCut.Type
-        };
-        public static HairCut SelectHaircut(string type, HairLengthRoot.HairLength length)
-        {
-            switch (type) {
-                case BobbedHairCut.Type: return new BobbedHairCut(length);
-                case FoxTailHairCut.Type: return new FoxTailHairCut(length);
-                case BangHairCut.Type: return new BangHairCut(length);
-                default: throw new Exception("Unknown Haircut");
+            get
+            {
+                return 300;
             }
         }
+
+        public HairCut(HairLength hairLength) : base(hairLength) { }
     }
 }

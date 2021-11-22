@@ -94,5 +94,25 @@ namespace BeautySaloon
                 return val;
             }
         }
+
+        public static bool GetBool(string title)
+        {
+            while(true) {
+                Console.Write("\n" + title + " (д/н):");
+                var key = Console.ReadKey().KeyChar;
+                switch(key) {
+                    case 'д':
+                    case 'y': return true;
+
+                    case 'н':
+                    case 'n': return false;
+                    default: {
+                        Console.WriteLine("\n Вы должны написать букву д (да) или н (нет)!");
+                        continue;
+                    }
+                }
+
+            }
+        }
     }
 }
