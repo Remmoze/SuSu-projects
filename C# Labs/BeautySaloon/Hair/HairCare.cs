@@ -8,6 +8,7 @@
             {
                 return 50;
             }
+
         }
 
         public HairCare(HairLength hairLength): base(hairLength) { }

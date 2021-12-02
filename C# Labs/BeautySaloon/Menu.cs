@@ -25,7 +25,7 @@ namespace BeautySaloon
                 case "Средние": hair = new MediumHairLength(); break;
                 case "Короткие": hair = new ShortHairLength(); break;
                 default: throw new Exception("Unknown hair length");
-            }
+            } 
             Console.Clear();
             return new Client(name, hair);
         }

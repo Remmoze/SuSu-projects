@@ -11,5 +11,6 @@
         }
 
         public HairStyle(HairLength hairLength) : base(hairLength) { }
+
     }
 }

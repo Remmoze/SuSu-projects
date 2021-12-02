@@ -7,7 +7,7 @@
 
     public abstract class HairBase : IPricedItem
     {
-        public virtual int Price { get; }
+        public abstract int Price { get; }
         public virtual HairLength HairLength { get; set; }
 
         public HairBase(HairLength hairLength)
