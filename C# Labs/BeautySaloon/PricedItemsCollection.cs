@@ -35,7 +35,7 @@ namespace BeautySaloon
                 if (curItem.Equals(item)) {
                     Storage.RemoveAt(i);
                     return true;
-                }
+                } 
             }
             return false;
         }

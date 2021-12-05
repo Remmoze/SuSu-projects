@@ -57,24 +57,21 @@ namespace BeautySaloon
         public static bool GetBool(string title)
         {
             while(true) {
-                Console.Write("\n" + title + " (д/н):");
+                Console.Write(title + " (да/нет): ");
                 var key = Console.ReadKey().KeyChar;
+                Console.WriteLine();
                 switch(key) {
-                    case 'm':
-                    case '1':
                     case 'д':
                     case 'y': { 
                         return true; 
                     }
-
                     case 'н':
                     case 'n': return false;
                     default: {
-                        Console.WriteLine("\n Вы должны написать букву д (да) или н (нет)!");
+                        Console.WriteLine("Вы должны написать \"да\" или \"нет\"");
                         continue;
                     }
                 }
-
             }
         }
     }

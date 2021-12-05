@@ -7,9 +7,8 @@ namespace BeautySaloon
         public static Service GetNewService()
         {
             var client = GetClient();
-            var barber = SelectBarber();
             var date = SelectDate();
-            var service = new Service(client, barber, date);
+            var service = new Service(client, date);
             return SelectServices(service);
         }
 
@@ -17,6 +16,8 @@ namespace BeautySaloon
         {
             Console.Write("Ваше имя: ");
             var name = Console.ReadLine();
+            Console.Clear();
+
             Console.WriteLine("Ваша длина волос: ");
             string hairlength = Helper.OptionsSelector(new string[] { "Длинные", "Средние", "Короткие" });
             HairLength hair;
@@ -25,7 +26,7 @@ namespace BeautySaloon
                 case "Средние": hair = new MediumHairLength(); break;
                 case "Короткие": hair = new ShortHairLength(); break;
                 default: throw new Exception("Unknown hair length");
-            } 
+            }
             Console.Clear();
             return new Client(name, hair);
         }
@@ -54,11 +55,22 @@ namespace BeautySaloon
 
         private static Service SelectServices(Service service)
         {
-            service.Haircut = Helper.GetBool("Нужна ли вам стрижка?") ? new HairCut(service.Client.HairLength) : null;
-            service.HairStyle = Helper.GetBool("Нужна ли вам прическа?") ? new HairStyle(service.Client.HairLength) : null;
-            service.HairDye = Helper.GetBool("Нужно ли вам окрашивание?") ? new HairDye(service.Client.HairLength) : null;
-            service.Accessories = Helper.GetBool("Нужны ли вам украшения?") ? new HairAccessory() : null;
-            service.Care = Helper.GetBool("Нужен ли вам уход за волосами?") ? new HairCare(service.Client.HairLength) : null;
+            service.AddItem(SelectBarber());
+            if (Helper.GetBool("Нужна ли вам стрижка?"))
+                service.AddItem(new HairCut(service.Client.HairLength));
+
+            if (Helper.GetBool("Нужна ли вам прическа?"))
+                service.AddItem(new HairStyle(service.Client.HairLength));
+
+            if (Helper.GetBool("Нужно ли вам окрашивание?"))
+                service.AddItem(new HairDye(service.Client.HairLength));
+
+            if (Helper.GetBool("Нужны ли вам украшения?"))
+                service.AddItem(new HairAccessory());
+
+            if (Helper.GetBool("Нужен ли вам уход за волосами?"))
+                service.AddItem(new HairCare(service.Client.HairLength));
+
             Console.Clear();
             return service;
         }

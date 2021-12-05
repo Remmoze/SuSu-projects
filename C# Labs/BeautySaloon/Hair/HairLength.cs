@@ -8,55 +8,19 @@
 
     public class LongHairLength : HairLength
     {
-        public override string Length
-        {
-            get
-            {
-                return "Длинные";
-            }
-        }
-        public override int PriceMultiplier
-        {
-            get
-            {
-                return 3;
-            }
-        }
+        public override string Length => "Длинные";
+        public override int PriceMultiplier => 3;
     }
 
     public class MediumHairLength : HairLength
     {
-        public override string Length
-        {
-            get
-            {
-                return "Средние";
-            }
-        }
-        public override int PriceMultiplier
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override string Length => "Средние";
+        public override int PriceMultiplier => 2;
     }
 
     public class ShortHairLength : HairLength
     {
-        public override string Length
-        {
-            get
-            {
-                return "Короткие";
-            }
-        }
-        public override int PriceMultiplier
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override string Length => "Короткие";
+        public override int PriceMultiplier => 1;
     }
 }

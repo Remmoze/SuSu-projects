@@ -2,13 +2,8 @@
 {
     public class HairCut : HairBase
     {
-        public override int Price
-        {
-            get
-            {
-                return 300;
-            }
-        }
+        public override string Title => "Стрижка";
+        public override int Price => 300;
 
         public HairCut(HairLength hairLength) : base(hairLength) { }
     }

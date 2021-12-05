@@ -1,56 +1,48 @@
 ﻿using System;
+using System.Linq;
 
 namespace BeautySaloon
 {
     public class Service
     {
-        public HairCut Haircut;
-        public HairStyle HairStyle;
-        public HairDye HairDye;
-        public HairAccessory Accessories;
-        public HairCare Care;
-
         public Client Client;
-        public Barber Barber;
         public Date Date;
 
-        public Service(Client client, Barber barber, Date date)
+        private readonly PricedItemsCollection<IPricedItem> Items = new();
+
+        public Service(Client client, Date date)
         {
             Client = client;
-            Barber = barber;
             Date = date;
+        }
+
+        public void AddItem(IPricedItem item)
+        {
+            Items.Add(item);
         }
 
         public int CalculatePrice()
         {
-            int totalPrice = 0;
-            if (Haircut != null) totalPrice += Haircut.FinalPrice();
-            if (HairStyle != null) totalPrice += HairStyle.FinalPrice();
-            if (HairDye != null) totalPrice += HairDye.FinalPrice();
-            if (Accessories != null) totalPrice += Accessories.FinalPrice();
-            if (Care != null) totalPrice += Care.FinalPrice();
-
-            totalPrice += Barber.Price;
-            return totalPrice;
+            return Items.Sum(item => item.Price);
         }
 
         private string ListServices()
         {
-            string list = "";
-            if (Haircut != null) list += "Стрижка, ";
-            if (HairStyle != null) list += "Прическа, ";
-            if (HairDye != null) list += "Окрашивание, ";
-            if (Accessories != null) list += "Украшения, ";
-            if (Care != null) list += "Уход";
-            return list;
+            string str = "";
+            foreach(var item in Items) {
+                str += item.Title;
+                str += " (" + item.Price + "), ";
+            }
+            return str;
         }
 
         public override string ToString()
         {
+            var barber = Items.FirstOrDefault(item => item.Title.Contains("Мастер"));
             return string.Join(Environment.NewLine,
                 "Вы: " + Client,
                 "",
-                $"Вас будет обслуживать {Barber.Title} мастер",
+                $"Вас будет обслуживать {barber.Title}",
                 "Наши услуги дла вас:",
                 ListServices(),
                 "",

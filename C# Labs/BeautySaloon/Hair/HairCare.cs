@@ -2,15 +2,9 @@
 {
     public class HairCare : HairBase
     {
-        public override int Price
-        {
-            get
-            {
-                return 50;
-            }
+        public override string Title => "Уход за волосами";
+        public override int Price => 50;
 
-        }
-
-        public HairCare(HairLength hairLength): base(hairLength) { }
+        public HairCare(HairLength hairLength) : base(hairLength) { }
     }
 }
