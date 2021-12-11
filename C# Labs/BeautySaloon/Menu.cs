@@ -4,12 +4,30 @@ namespace BeautySaloon
 {
     public static class Menu
     {
-        public static Service GetNewService()
+        public static void GenerateNewService()
         {
+            var items = new PricedItemsCollection<IPricedItem>();
+
             var client = GetClient();
             var date = SelectDate();
-            var service = new Service(client, date);
-            return SelectServices(service);
+            items.Add(SelectBarber());
+
+            if (Helper.GetBool("Нужна ли вам стрижка?"))
+                items.Add(new HairCut(client.HairLength));
+
+            if (Helper.GetBool("Нужна ли вам прическа?"))
+                items.Add(new HairStyle(client.HairLength));
+
+            if (Helper.GetBool("Нужно ли вам окрашивание?"))
+                items.Add(new HairDye(client.HairLength));
+
+            if (Helper.GetBool("Нужны ли вам украшения?"))
+                items.Add(new HairAccessory());
+
+            if (Helper.GetBool("Нужен ли вам уход за волосами?"))
+                items.Add(new HairCare(client.HairLength));
+
+            Console.Clear();
         }
 
         private static Client GetClient()
@@ -51,28 +69,6 @@ namespace BeautySaloon
                 case "Младший": return new BeginnerBarber();
                 default: throw new Exception("Unknown barber");
             }
-        }
-
-        private static Service SelectServices(Service service)
-        {
-            service.AddItem(SelectBarber());
-            if (Helper.GetBool("Нужна ли вам стрижка?"))
-                service.AddItem(new HairCut(service.Client.HairLength));
-
-            if (Helper.GetBool("Нужна ли вам прическа?"))
-                service.AddItem(new HairStyle(service.Client.HairLength));
-
-            if (Helper.GetBool("Нужно ли вам окрашивание?"))
-                service.AddItem(new HairDye(service.Client.HairLength));
-
-            if (Helper.GetBool("Нужны ли вам украшения?"))
-                service.AddItem(new HairAccessory());
-
-            if (Helper.GetBool("Нужен ли вам уход за волосами?"))
-                service.AddItem(new HairCare(service.Client.HairLength));
-
-            Console.Clear();
-            return service;
         }
     }
 }

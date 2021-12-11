@@ -7,9 +7,13 @@ namespace BeautySaloon
     public class PricedItemsCollection<T> : ICollection<T> where T : IPricedItem
     {
         protected ArrayList Storage;
-
         public PricedItemsCollection()
         {
+            var hello = new List<string>();
+            hello.Sort((x, y) => {
+                return x.Length - y.Length;
+            });
+
             Storage = new ArrayList();
         }
 
@@ -35,7 +39,7 @@ namespace BeautySaloon
                 if (curItem.Equals(item)) {
                     Storage.RemoveAt(i);
                     return true;
-                } 
+                }
             }
             return false;
         }
@@ -56,6 +60,21 @@ namespace BeautySaloon
         }
         public virtual IEnumerator<T> GetEnumerator() => new PricedItemsEnumerator<T>(this);
         IEnumerator IEnumerable.GetEnumerator() => new PricedItemsEnumerator<T>(this);
+
+        public void Sort(Func<T, T, int> comparison)
+        {
+            for (int i = 0; i < Storage.Count; i++) {
+                var item = Storage[i];
+                var currentIndex = i;
+
+                while (currentIndex > 0 && comparison((T)Storage[currentIndex - 1], (T)item) > 0) {
+                    Storage[currentIndex] = Storage[currentIndex - 1];
+                    currentIndex--;
+                }
+
+                Storage[currentIndex] = item;
+            }
+        }
     }
 
     public class PricedItemsEnumerator<T> : IEnumerator<T> where T : IPricedItem

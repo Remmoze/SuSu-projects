@@ -26,6 +26,32 @@ namespace BeautySaloon
             return Items.Sum(item => item.Price);
         }
 
+        public void Test()
+        {
+            Console.WriteLine(ListServices());
+
+            Items.Sort(delegate (IPricedItem x, IPricedItem y) {
+                return x.CompareTo(y);
+            });
+
+            Console.WriteLine(ListServices());
+
+            Items.Sort((x, y) => {
+                return y.Price - x.Price;
+            });
+
+            Console.WriteLine(ListServices());
+
+            Items.Sort((x, y) => x.CompareTo(y));
+
+
+            Console.WriteLine(ListServices());
+
+            Items.Sort((x, y) => x.Title.Length - y.Title.Length);
+
+            Console.WriteLine(ListServices());
+        }
+
         private string ListServices()
         {
             string str = "";

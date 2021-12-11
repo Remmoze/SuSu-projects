@@ -8,7 +8,9 @@ namespace BeautySaloon
         {
             var service = Menu.GetNewService();
 
-            Console.WriteLine(service); 
+            service.Test();
+
+            //Console.WriteLine(service); 
         }
     }
 }
