@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace BeautySaloon
 {
@@ -10,7 +11,8 @@ namespace BeautySaloon
 
             var client = GetClient();
             var date = SelectDate();
-            items.Add(SelectBarber());
+            var barber = SelectBarber();
+            items.Add(barber);
 
             if (Helper.GetBool("Нужна ли вам стрижка?"))
                 items.Add(new HairCut(client.HairLength));
@@ -27,7 +29,33 @@ namespace BeautySaloon
             if (Helper.GetBool("Нужен ли вам уход за волосами?"))
                 items.Add(new HairCare(client.HairLength));
 
+
+            items.Sort((x, y) => x.CompareTo(y));
+
+            //items.Sort(delegate (IPricedItem x, IPricedItem y) {
+            //    return x.CompareTo(y);
+            //});
+
             Console.Clear();
+            Console.WriteLine("Вы: " + client);
+            Console.WriteLine();
+            Console.WriteLine("Вас будет обслуживать " + barber.Title);
+            Console.WriteLine("Наши услуги дла вас:");
+            Console.WriteLine(ListServices(items));
+            Console.WriteLine();
+            Console.WriteLine("Цена: " + items.Sum(item => item.Price));
+            Console.WriteLine("Время приема: " + date);
+            Console.WriteLine("Не опаздывайте!");
+        }
+
+        private static string ListServices(PricedItemsCollection<IPricedItem> items)
+        {
+            string str = "";
+            foreach (var item in items) {
+                str += item.Title;
+                str += " (" + item.Price + "), ";
+            }
+            return str;
         }
 
         private static Client GetClient()
